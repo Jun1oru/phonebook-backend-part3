@@ -13,6 +13,7 @@ const morganLogger =
 
 app.use(morgan(morganLogger));
 app.use(cors());
+app.use(express.static('dist'));
 
 let persons = [
   {
@@ -59,7 +60,7 @@ app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id;
   persons = persons.filter((person) => person.id !== id);
 
-  response.status(204).end();
+  response.json(persons);
 });
 
 app.post('/api/persons', (request, response) => {
@@ -87,7 +88,7 @@ app.post('/api/persons', (request, response) => {
     number: body.number,
   };
 
-  // persons = persons.concat(person);
+  persons = persons.concat(person);
 
   response.json(person);
 });
