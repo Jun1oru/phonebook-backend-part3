@@ -5,9 +5,8 @@ require('dotenv').config();
 const app = express();
 
 const Person = require('./models/person');
-let persons = [];
 
-morgan.token('content', function (req, res) {
+morgan.token('content', function (req) {
   return JSON.stringify(req.body);
 });
 const morganLogger =
